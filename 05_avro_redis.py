@@ -97,8 +97,8 @@ def benchmark_avro(data, schema):
 # Function to benchmark JSON serialization with Redis
 def benchmark_json(data):
     ## Storing JSON data in Redis
-    serialized_data_json = json.dumps(data).encode("utf-8")
     start_time_store = time.time()
+    serialized_data_json = json.dumps(data).encode("utf-8")
     r.set("user:json", serialized_data_json)
     end_time_store = time.time()
 
