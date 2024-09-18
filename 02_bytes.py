@@ -1,6 +1,7 @@
+## pip install fastavro
+
 from fastavro import schemaless_writer, schemaless_reader
 from io import BytesIO
-import json
 
 # Define the Avro schema
 schema = {

@@ -16,7 +16,7 @@ schema_v2 = {
 
 parsed_schema_v2 = parse_schema(schema_v2)
 # Read data using the schema
-with open("data/numbers2.avro", "rb") as in_file:
+with open("data/numbers.avro", "rb") as in_file:
     for record in reader(in_file, reader_schema=parsed_schema_v2):
         print(record)
 

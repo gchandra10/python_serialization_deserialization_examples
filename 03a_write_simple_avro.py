@@ -1,4 +1,4 @@
-from fastavro import writer, reader, parse_schema
+from fastavro import writer, parse_schema
 
 schema = {
     "type": "record",

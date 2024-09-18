@@ -1,8 +1,4 @@
-import json
-import fastavro
-from fastavro.schema import load_schema, parse_schema
 from friends_data import friends_json_data
-
 
 def infer_avro_type(value, field_name="Field"):
     if isinstance(value, str):
@@ -49,151 +45,151 @@ def convert_avro(datatype):
         avro_filename = "friends_simple_data.avro"
         data = [friends_data]
         # Generate the Avro schema based directly on the Python data structure
-        # avro_schema = generate_avro_schema_from_json(friends_data)
-        # print(avro_schema)
+        avro_schema = generate_avro_schema_from_json(friends_data)
+        print(avro_schema)
 
-        avro_schema = {
-            "type": "record",
-            "name": "AutoGenRecord_ageField",
-            "fields": [
-                {"name": "name", "type": ["null", "string"], "default": "null"},
-                {"name": "job", "type": ["null", "string"], "default": "null"},
-                {"name": "age", "type": ["null", "int"], "default": None},
-            ],
-        }
+        # avro_schema = {
+        #     "type": "record",
+        #     "name": "AutoGenRecord_ageField",
+        #     "fields": [
+        #         {"name": "name", "type": ["null", "string"], "default": "null"},
+        #         {"name": "job", "type": ["null", "string"], "default": "null"},
+        #         {"name": "age", "type": ["null", "int"], "default": None},
+        #     ],
+        # }
 
-    elif datatype == "Nested":
-        friends_data = obj_data.nested_data()  # Assuming this returns a list of records
-        avro_filename = "friends_nested_data.avro"
+    # elif datatype == "Nested":
+    #     friends_data = obj_data.nested_data()  # Assuming this returns a list of records
+    #     avro_filename = "friends_nested_data.avro"
 
-        data = [friends_data]
-        avro_schema = {
-            "type": "record",
-            "name": "Friends",
-            "fields": [
-                {"name": "name", "type": ["string", "null"], "default": "null"},
-                {"name": "occupation", "type": ["string", "null"], "default": "null"},
-                {
-                    "name": "relationship_status",
-                    "type": ["string", "null"],
-                    "default": "null",
-                },
-                {
-                    "name": "friends",
-                    "type": ["null", {"type": "array", "items": "string"}],
-                    "default": "null",
-                },
-                {
-                    "name": "education",
-                    "type": [
-                        "null",
-                        {
-                            "type": "record",
-                            "name": "Education",
-                            "fields": [
-                                {
-                                    "name": "high_school",
-                                    "type": ["string", "null"],
-                                    "default": "null",
-                                },
-                                {
-                                    "name": "college",
-                                    "type": ["string", "null"],
-                                    "default": "null",
-                                },
-                                {
-                                    "name": "degree",
-                                    "type": ["string", "null"],
-                                    "default": "null",
-                                },
-                                {
-                                    "name": "culinary_school",
-                                    "type": ["string", "null"],
-                                    "default": "null",
-                                },
-                                {
-                                    "name": "drama_school",
-                                    "type": ["string", "null"],
-                                    "default": "null",
-                                },
-                            ],
-                        },
-                    ],
-                    "default": "null",
-                },
-                {
-                    "name": "employment_history",
-                    "type": [
-                        "null",
-                        {
-                            "type": "array",
-                            "items": {
-                                "type": "record",
-                                "name": "Employment",
-                                "fields": [
-                                    {
-                                        "name": "company",
-                                        "type": ["string", "null"],
-                                        "default": "null",
-                                    },
-                                    {
-                                        "name": "position",
-                                        "type": ["string", "null"],
-                                        "default": "null",
-                                    },
-                                    {
-                                        "name": "years",
-                                        "type": ["string", "null"],
-                                        "default": "null",
-                                    },
-                                    {
-                                        "name": "show",
-                                        "type": ["string", "null"],
-                                        "default": "null",
-                                    },
-                                    {
-                                        "name": "role",
-                                        "type": ["string", "null"],
-                                        "default": "null",
-                                    },
-                                ],
-                            },
-                        },
-                    ],
-                    "default": "null",
-                },
-                {
-                    "name": "children",
-                    "type": [
-                        "null",
-                        {
-                            "type": "array",
-                            "items": {
-                                "type": "record",
-                                "name": "Child",
-                                "fields": [
-                                    {"name": "name", "type": "string"},
-                                    {"name": "mother", "type": "string"},
-                                ],
-                            },
-                        },
-                    ],
-                    "default": "null",
-                },
-                {"name": "spouse", "type": ["string", "null"], "default": "null"},
-            ],
-        }
+    #     data = [friends_data]
+    #     avro_schema = {
+    #         "type": "record",
+    #         "name": "Friends",
+    #         "fields": [
+    #             {"name": "name", "type": ["string", "null"], "default": "null"},
+    #             {"name": "occupation", "type": ["string", "null"], "default": "null"},
+    #             {
+    #                 "name": "relationship_status",
+    #                 "type": ["string", "null"],
+    #                 "default": "null",
+    #             },
+    #             {
+    #                 "name": "friends",
+    #                 "type": ["null", {"type": "array", "items": "string"}],
+    #                 "default": "null",
+    #             },
+    #             {
+    #                 "name": "education",
+    #                 "type": [
+    #                     "null",
+    #                     {
+    #                         "type": "record",
+    #                         "name": "Education",
+    #                         "fields": [
+    #                             {
+    #                                 "name": "high_school",
+    #                                 "type": ["string", "null"],
+    #                                 "default": "null",
+    #                             },
+    #                             {
+    #                                 "name": "college",
+    #                                 "type": ["string", "null"],
+    #                                 "default": "null",
+    #                             },
+    #                             {
+    #                                 "name": "degree",
+    #                                 "type": ["string", "null"],
+    #                                 "default": "null",
+    #                             },
+    #                             {
+    #                                 "name": "culinary_school",
+    #                                 "type": ["string", "null"],
+    #                                 "default": "null",
+    #                             },
+    #                             {
+    #                                 "name": "drama_school",
+    #                                 "type": ["string", "null"],
+    #                                 "default": "null",
+    #                             },
+    #                         ],
+    #                     },
+    #                 ],
+    #                 "default": "null",
+    #             },
+    #             {
+    #                 "name": "employment_history",
+    #                 "type": [
+    #                     "null",
+    #                     {
+    #                         "type": "array",
+    #                         "items": {
+    #                             "type": "record",
+    #                             "name": "Employment",
+    #                             "fields": [
+    #                                 {
+    #                                     "name": "company",
+    #                                     "type": ["string", "null"],
+    #                                     "default": "null",
+    #                                 },
+    #                                 {
+    #                                     "name": "position",
+    #                                     "type": ["string", "null"],
+    #                                     "default": "null",
+    #                                 },
+    #                                 {
+    #                                     "name": "years",
+    #                                     "type": ["string", "null"],
+    #                                     "default": "null",
+    #                                 },
+    #                                 {
+    #                                     "name": "show",
+    #                                     "type": ["string", "null"],
+    #                                     "default": "null",
+    #                                 },
+    #                                 {
+    #                                     "name": "role",
+    #                                     "type": ["string", "null"],
+    #                                     "default": "null",
+    #                                 },
+    #                             ],
+    #                         },
+    #                     },
+    #                 ],
+    #                 "default": "null",
+    #             },
+    #             {
+    #                 "name": "children",
+    #                 "type": [
+    #                     "null",
+    #                     {
+    #                         "type": "array",
+    #                         "items": {
+    #                             "type": "record",
+    #                             "name": "Child",
+    #                             "fields": [
+    #                                 {"name": "name", "type": "string"},
+    #                                 {"name": "mother", "type": "string"},
+    #                             ],
+    #                         },
+    #                     },
+    #                 ],
+    #                 "default": "null",
+    #             },
+    #             {"name": "spouse", "type": ["string", "null"], "default": "null"},
+    #         ],
+    #     }
 
-    with open(f"data/{avro_filename}", "a+b") as avro_file:
-        parsed_schema = fastavro.parse_schema(avro_schema)
-        for record in data:
-            try:
-                fastavro.writer(avro_file, parsed_schema, record)
-            except ValueError as e:
-                print(f"Error processing record: {record}")
-                print(f"Error message: {e}")
-                continue
+    # with open(f"data/{avro_filename}", "a+b") as avro_file:
+    #     parsed_schema = fastavro.parse_schema(avro_schema)
+    #     for record in data:
+    #         try:
+    #             fastavro.writer(avro_file, parsed_schema, record)
+    #         except ValueError as e:
+    #             print(f"Error processing record: {record}")
+    #             print(f"Error message: {e}")
+    #             continue
 
 
 convert_avro("Simple")
-convert_avro("Nested")
+#convert_avro("Nested")

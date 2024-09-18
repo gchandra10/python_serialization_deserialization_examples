@@ -1,0 +1,6 @@
+redis:
+  host: 
+  db: 0
+  user: 
+  password: 
+  port: 

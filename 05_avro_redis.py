@@ -1,10 +1,11 @@
-import json, time
+import json
+import time
 from fastavro import schemaless_writer, schemaless_reader
 from io import BytesIO
 from db_config import get_redis_connection
 
 r = get_redis_connection()
-# r.flushall()
+r.flushall()
 
 # Define a sample data structure
 data = {
@@ -72,8 +73,8 @@ def avro_deserialize(serialized_data, schema):
 # Function to benchmark Avro serialization with Redis
 def benchmark_avro(data, schema):
     ## Storing Avro data in Redis
-    serialized_data = avro_serialize(data, schema)
     start_time_store = time.time()
+    serialized_data = avro_serialize(data, schema)
     r.set("user:avro", serialized_data)
     end_time_store = time.time()
 
@@ -132,3 +133,5 @@ keys = ["user:avro", "user:json"]
 for key in keys:
     memory_usage = r.memory_usage(key)
     print(f"\n Memory usage for {key}: {memory_usage} bytes")
+    
+    
