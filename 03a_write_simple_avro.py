@@ -2,7 +2,7 @@ from fastavro import writer, parse_schema
 
 schema = {
     "type": "record",
-    "name": "Number",
+    "name": "User",
     "fields": [{"name": "value", "type": "int"}],
 }
 
@@ -22,13 +22,14 @@ print("Data serialized with version 1 of the schema.")
 # Evolved schema with a new optional field 'description'
 schema_v2 = {
     "type": "record",
-    "name": "Number",
+    "name": "User",
+    "namespace": "customer",
     "fields": [
         {"name": "value", "type": "int"},
         {
             "name": "description",
             "type": ["null", "string"],
-            "default": "null",
+            "default": None
         },  # New field with default
     ],
 }

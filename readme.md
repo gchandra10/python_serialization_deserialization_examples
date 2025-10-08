@@ -1,8 +1,10 @@
 ## Readme
 
-- poetry run python 01_json.py
+```
+uv run python 01_json.py
 
+or
 
-To run examples 05_avro_redis
+poetry run python 01_json.py
+```
 
-rename config_template.yaml to config.yaml

@@ -3,7 +3,8 @@ from fastavro import reader, parse_schema
 # Evolved schema with a new optional field 'description'
 schema_v2 = {
     "type": "record",
-    "name": "Number",
+    "name": "User",
+    "namespace": "customer",
     "fields": [
         {"name": "value", "type": "int"},
         {
@@ -28,7 +29,8 @@ print(
 # Further evolved schema with an array field 'tags'
 schema_v3 = {
     "type": "record",
-    "name": "Number",
+    "name": "User",
+    "namespace": "customer",
     "fields": [
         {"name": "value", "type": "int"},
         {"name": "description", "type": ["null", "string"], "default": None},
